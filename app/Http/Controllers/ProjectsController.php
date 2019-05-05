@@ -3,43 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Project;
+use Illuminate\Filesystem\Filesystem;
 
 class ProjectsController extends Controller
 {
     public function index() {
 
         $projects = \App\Project::all();
-        // return $projects;
+        
         return view('projects.index', compact('projects'));
     }
 
     public function create() {
+
         return view('projects.create');
+    
     }
 
     public function store() {
-        $project = new \App\Project();
 
-        $project->title = request('title');
-        $project->description = request('description');
-        $project->save();
+        $attributes = request()->validate([
+            'title' => ['bail', 'required', 'min:3'],
+            'description' => ['bail', 'required', 'min:3'],
+        ]);
+
+        Project::create($attributes);
 
         return redirect('/projects');
+    
     }
 
-    public function show() {
+    public function show(Filesystem $file) {
+
+        dd($file);
+
+        return view('projects.show', compact('project'));
         
     }
 
-    public function edit() {
+    public function edit(Project $project) {
+
+        return view('projects.edit', compact('project'));
+        
+    }
+
+    public function update(Project $project) {
+
+        $project->update(request(['title', 'description']));
+
+        return redirect('/projects');
 
     }
 
-    public function update() {
+    public function destroy(Project $project) {
 
-    }
+        $project->delete();
 
-    public function destroy() {
+        return redirect('/projects');
 
     }
 }

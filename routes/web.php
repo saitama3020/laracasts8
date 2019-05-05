@@ -11,15 +11,23 @@
 |
 */
 
+use Illuminate\Filesystem\Filesystem;
+
+// app()->singleton('example', function () {
+//     return new \App\Example;
+// });
+
+
 Route::get('/', function () {
+
+    dd(app('example'), app('example'));
+
     return view('welcome');
 });
 
 Route::resource('projects', 'ProjectsController');
-// Route::get('/projects', 'ProjectsController@index');
-// Route::get('/projects/create', 'ProjectsController@create');
-// Route::get('/projects/{project}', 'ProjectsController@show');
-// Route::post('/projects', 'ProjectsController@store');
-// Route::get('/projects/{project}/edit', 'ProjectsController@edit');
-// Route::patch('/projects/{project}', 'ProjectsController@update');
-// Route::delete('/projects/{project}', 'ProjectsController@destroy');
+
+
+Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
+Route::post('/completed-tasks/{task}', 'CompletedTaskController@store');
+Route::delete('/completed-tasks/{task}', 'CompletedTaskController@destroy');
