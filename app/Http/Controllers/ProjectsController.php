@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
-use Illuminate\Filesystem\Filesystem;
+use App\Services\Twitter;
 
 class ProjectsController extends Controller
 {
@@ -34,9 +34,7 @@ class ProjectsController extends Controller
     
     }
 
-    public function show(Filesystem $file) {
-
-        dd($file);
+    public function show(Project $project) {
 
         return view('projects.show', compact('project'));
         
