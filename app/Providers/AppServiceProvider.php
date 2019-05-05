@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\UserRepository::class,
             \App\Repositories\DbUserRepository::class
         );
+
+        if ($this->app->isLocal()) {
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 
     /**

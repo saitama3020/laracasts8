@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     /**
@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function owns(Project $project) {
+        return $this->id === $project->owner_id;
+    }
+
+    public function projects() {
+        return $this->hasMany(Project::class, 'owner_id');
+    }
+
 }

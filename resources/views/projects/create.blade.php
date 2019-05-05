@@ -32,19 +32,19 @@
             name="description" placeholder="Description" required>{{ old('description') }}</textarea>
           
         </div>
-
+        
       </div>
       
       <div class="field">
         
         <div class="control">
-
+          
           <button type="submit" class="button is-link">Create Project</button>
-        
+          
         </div>
         
       </div>
-
+      
       @include('errors')
 
     </form>

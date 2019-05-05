@@ -41,9 +41,10 @@
                 <button type="submit" class="button is-link">Update Project</button>
 
             </div>
-
+            
         </div>
-
+        
+        @include('errors')
         
     </form>
     
@@ -62,6 +63,7 @@
             </div>
         
         </div>
+
 
     </form>
 
